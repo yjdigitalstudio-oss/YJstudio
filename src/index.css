@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sublicraft-blue: #002366;
+  --color-sublicraft-accent: #0056b3;
+}

@@ -1,0 +1,43 @@
+{
+  "entities": {
+    "PurchaseOrder": {
+      "title": "Purchase Order",
+      "description": "A purchase operation for garment manufacturing",
+      "type": "object",
+      "properties": {
+        "createdAt": { "type": "string", "format": "date-time" },
+        "deliveryDate": { "type": "string", "format": "date", "description": "YYYY-MM-DD" },
+        "description": { "type": "string" },
+        "exchangeRate": { "type": "number", "description": "USD to VES rate" },
+        "totalUSD": { "type": "number" },
+        "totalVES": { "type": "number" },
+        "status": { "type": "string", "enum": ["draft", "active", "completed"] },
+        "clientName": { "type": "string" }
+      },
+      "required": ["createdAt", "exchangeRate", "totalUSD", "totalVES", "status"]
+    },
+    "GarmentItem": {
+      "title": "Garment Item",
+      "description": "An individual item within a purchase order",
+      "type": "object",
+      "properties": {
+        "garmentType": { "type": "string" },
+        "quantity": { "type": "number" },
+        "size": { "type": "string" },
+        "priceUSD": { "type": "number" },
+        "totalUSD": { "type": "number" }
+      },
+      "required": ["garmentType", "quantity", "size", "priceUSD", "totalUSD"]
+    }
+  },
+  "firestore": {
+    "/orders/{orderId}": {
+      "schema": "PurchaseOrder",
+      "description": "Collection of purchase orders"
+    },
+    "/orders/{orderId}/items/{itemId}": {
+      "schema": "GarmentItem",
+      "description": "Items associated with a specific purchase order"
+    }
+  }
+}
